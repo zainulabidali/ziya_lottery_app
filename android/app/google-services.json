@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "500913682579",
+    "project_id": "lotteryapp-7ba43",
+    "storage_bucket": "lotteryapp-7ba43.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:500913682579:android:e433277c15d38e76fd3566",
+        "android_client_info": {
+          "package_name": "com.example.lottery_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkKM81RSpFZepezUza03mPi8adlgkGsLA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
