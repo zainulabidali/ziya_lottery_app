@@ -16,22 +16,41 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor:
-            isFilled ? AppColors.primaryBlue : AppColors.white, // 🔹 Blue top color
-        foregroundColor:
-            isFilled ? AppColors.white : AppColors.primaryBlue,
-        side: const BorderSide(color: AppColors.primaryBlue, width: 1),
-        minimumSize: const Size(double.infinity, AppSizes.buttonHeight),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppSizes.borderRadius),
-        ),
+    return Container(
+      width: double.infinity,
+      height: AppSizes.buttonHeight,
+      decoration: BoxDecoration(
+        gradient: isFilled
+            ? const LinearGradient(
+                colors: [
+                  AppColors.primaryBlue,
+                  AppColors.gradientLight,
+                ],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              )
+            : null,
+        color: isFilled ? null : AppColors.white,
+        borderRadius: BorderRadius.circular(AppSizes.borderRadius),
+        border: Border.all(color: AppColors.primaryBlue, width: 1),
       ),
-      onPressed: onPressed,
-      child: Text(
-        text,
-        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppSizes.borderRadius),
+          ),
+        ),
+        onPressed: onPressed,
+        child: Text(
+          text,
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+            color: isFilled ? AppColors.white : AppColors.primaryBlue,
+          ),
+        ),
       ),
     );
   }

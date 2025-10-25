@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lottery_app/core/constants/app_colors.dart';
 import 'package:lottery_app/providers.dart/auth_provider.dart';
+import 'package:lottery_app/screens/auth/sign_in_view.dart';
+import 'package:lottery_app/screens/auth/verify_account.dart';
 import 'package:provider/provider.dart';
 import '../../../core/constants/app_strings.dart';
 import '../../../core/components/custom_button.dart';
 import '../../../core/components/custom_textfield.dart';
-import '../../../core/components/gradient_background.dart';
 import '../../../core/components/spacing.dart';
-import '../../../controllers/auth_controller.dart';
 
 class ForgotPasswordView extends StatelessWidget {
   const ForgotPasswordView({super.key});
@@ -21,24 +20,12 @@ class ForgotPasswordView extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          Container(
-            height: 300.h,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [AppColors.primaryBlue, AppColors.gradientLight],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(40),
-                bottomRight: Radius.circular(40),
-              ),
-            ),
-          ),
+          bg_top_widget(),
+
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Spacing.height(40),
+              Spacing.height(50),
 
               Padding(
                 padding: const EdgeInsets.all(20.0),
@@ -75,12 +62,19 @@ class ForgotPasswordView extends StatelessWidget {
                         label: AppStrings.phoneNumber,
                         hint: '0987654321',
                         controller: phoneController,
-                        keyboardType: TextInputType.phone,
+                        keyboardType: TextInputType.phone, suffixcolor:  Colors.white,
                       ),
                       Spacing.height(30),
                       CustomButton(
                         text: AppStrings.sentCode,
-                        onPressed: () => AuthController.handleSendCode(context),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => VerifyAccount_view(),
+                            ),
+                          );
+                        },
                       ),
                       Spacing.height(20),
                       Center(
@@ -93,25 +87,8 @@ class ForgotPasswordView extends StatelessWidget {
                                 fontSize: 14.sp,
                               ),
                             ),
-                            Spacing.height(10),
-                            Row(
-                              children: [
-                                Text(
-                                  "Don't have an account? ",
-                                  style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 14.sp,
-                                  ),
-                                ),
-                                Text(
-                                  AppStrings.noAccount,
-                                  style: TextStyle(
-                                    color: Colors.blue,
-                                    fontSize: 14.sp,
-                                  ),
-                                ),
-                              ],
-                            ),
+                            Spacing.height(20),
+                            donthave(),
                           ],
                         ),
                       ),
@@ -123,6 +100,30 @@ class ForgotPasswordView extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class donthave extends StatelessWidget {
+  const donthave({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          "Don't have an account? ",
+          style: TextStyle(color: Colors.grey, fontSize: 14.sp),
+        ),
+        Text(
+          AppStrings.noAccount,
+          style: TextStyle(
+            color: Color.fromARGB(255, 1, 75, 167),
+            fontSize: 14.sp,
+          ),
+        ),
+      ],
     );
   }
 }

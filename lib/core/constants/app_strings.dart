@@ -10,6 +10,15 @@ class AppStrings {
   static const rememberMe = "Remember me";
   static const forgetPass = "Forget password?";
   static const orSignUpWith = "Or sign up with";
+  static const Donthave = "Don't have an account?";
+  static const verifyyouraccount = "Verify your\naccount";
+  static const createnew_pass = "Create new\npassword";
+  static const newPass = "New Password";
+  static const conformPass = "Conform Password";
+    static const resetPass = "RESET PASSWORD";
+
+
   static const noAccount = "Sign Up";
   static const sentCode = "SENT CODE";
+  static const verify = "VERIFY";
 }

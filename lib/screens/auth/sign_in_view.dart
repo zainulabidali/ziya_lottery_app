@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottery_app/core/constants/app_colors.dart';
 import 'package:lottery_app/providers.dart/auth_provider.dart';
+import 'package:lottery_app/screens/auth/forgot_password_view.dart';
 import 'package:provider/provider.dart';
 import '../../../core/constants/app_strings.dart';
 import '../../../core/components/custom_button.dart';
@@ -21,18 +22,7 @@ class SignInView extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-            Container(
-                    height: 300.h,
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [AppColors.primaryBlue, AppColors.gradientLight],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                     
-                    ),
-
-                  ),
+            bg_top_widget(),
            SingleChildScrollView(
 
               child: Column(
@@ -73,14 +63,14 @@ class SignInView extends StatelessWidget {
                           label: AppStrings.phoneNumber,
                           hint: '0987654321',
                           controller: phoneController,
-                          keyboardType: TextInputType.phone,
+                          keyboardType: TextInputType.phone, suffixcolor: Colors.white,
                         ),
                         Spacing.height(20),
                         CustomTextField(
                           label: AppStrings.password,
                           hint: '******',
                           controller: passController,
-                          obscure: true,
+                          obscure: true, suffixcolor: Colors.white,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -119,13 +109,8 @@ class SignInView extends StatelessWidget {
                                 ),
                               ),
                               Spacing.height(10),
-                              Text(
-                                AppStrings.noAccount,
-                                style: TextStyle(
-                                  color: Colors.blue,
-                                  fontSize: 14.sp,
-                                ),
-                              ),
+                                                         donthave(),
+
                             ],
                           ),
                         ),
@@ -140,5 +125,27 @@ class SignInView extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class bg_top_widget extends StatelessWidget {
+  const bg_top_widget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+            height: 300.h,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [AppColors.primaryBlue, AppColors.gradientLight],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+             
+            ),
+    
+          );
   }
 }
