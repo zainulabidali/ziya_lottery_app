@@ -16,6 +16,8 @@ class AppStrings {
   static const newPass = "New Password";
   static const conformPass = "Conform Password";
     static const resetPass = "RESET PASSWORD";
+      static const createAccount = "Create\nAccount";
+
 
 
   static const noAccount = "Sign Up";

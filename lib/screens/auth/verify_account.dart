@@ -99,6 +99,7 @@ class VerifyAccount_view extends StatelessWidget {
                         children: [
                           GestureDetector(
                             onTap: () {
+                              
                               // Resend OTP functionality
                             },
                             child: Text(

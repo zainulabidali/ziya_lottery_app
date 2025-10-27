@@ -8,8 +8,8 @@ class AuthController {
     provider.signIn();
   }
 
-  static void handleSendCode(BuildContext context) {
-    final provider = Provider.of<AuthProvider>(context, listen: false);
-    provider.sendCode();
-  }
+  // static void handleSendCode(BuildContext context) {
+  //   final provider = Provider.of<AuthProvider>(context, listen: false);
+  //   provider.sendCode();
+  // }
 }

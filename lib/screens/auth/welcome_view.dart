@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottery_app/screens/auth/create_account.dart';
 import 'package:lottery_app/screens/auth/forgot_password_view.dart';
 import 'package:lottery_app/screens/auth/sign_in_view.dart';
 import '../../../core/constants/app_strings.dart';
@@ -28,23 +29,56 @@ class WelcomeView extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 100.h),
-                CustomButton(
-                  text: AppStrings.signIn,
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.transparent,
+                    shadowColor: Colors.transparent,
+                    side: BorderSide(color: Colors.white),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50.r),
+                    ),
+                    minimumSize: Size(double.infinity, 50.h),
+                  ),
+
                   onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => SignInView()),
                     );
                   },
-                  isFilled: false,
+                  child: Text(
+                    AppStrings.signIn,
+                    style: TextStyle(color: Colors.white, fontSize: 14.sp),
+                  ),
                 ),
                 SizedBox(height: 20.h),
-                CustomButton(text: AppStrings.signUp, onPressed: () {
-                   Navigator.push(
+
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                    shadowColor: Colors.transparent,
+                    side: BorderSide(color: Colors.white),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50.r),
+                    ),
+                    minimumSize: Size(double.infinity, 50.h),
+                  ),
+
+                  onPressed: () {
+                    Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ForgotPasswordView()),
+                      MaterialPageRoute(builder: (context) => CreateAccount_view()),
                     );
-                }),
+                  },
+                  child: Text(
+                    AppStrings.signUp,
+                    style: TextStyle(
+                      color: const Color.fromARGB(255, 6, 6, 6),
+                      fontSize: 14.sp,
+                    ),
+                  ),
+                ),
+
                 SizedBox(height: 40.h),
                 Text(
                   AppStrings.loginWithSocial,

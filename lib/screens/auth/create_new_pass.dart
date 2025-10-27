@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottery_app/core/constants/app_colors.dart';
 import 'package:lottery_app/providers.dart/auth_provider.dart';
 import 'package:lottery_app/screens/auth/forgot_password_view.dart';
+import 'package:lottery_app/screens/auth/verify_success.dart';
 import 'package:provider/provider.dart';
 import '../../../core/constants/app_strings.dart';
 import '../../../core/components/custom_button.dart';
@@ -79,7 +80,14 @@ class CreateNewPass_view extends StatelessWidget {
                       Spacing.height(70),
                       CustomButton(
                         text: AppStrings.resetPass,
-                        onPressed: () => AuthController.handleSignIn(context),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const VerifySuccess_view(),
+                            ),
+                          );
+                        }
                       ),
                       Spacing.height(20),
                     
