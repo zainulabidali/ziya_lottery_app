@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lottery_app/core/components/spacing.dart';
+import 'package:lottery_app/screens/auth/constants/spacing.dart';
+import 'package:lottie/lottie.dart';
 
 class VerifySuccess_view extends StatelessWidget {
   const VerifySuccess_view({super.key});
@@ -17,7 +18,9 @@ class VerifySuccess_view extends StatelessWidget {
 
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Spacer(flex: 3),
+              Lottie.asset('assets/success.json', width: 250, height: 250),
+              Spacing.height(30),
+
               Text(
                 'Verify Successfull',
                 style: TextStyle(
@@ -30,9 +33,7 @@ class VerifySuccess_view extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
 
-              SizedBox(
-                height: 12,
-              ), // Spacing between the title and the first line of subtext
+              Spacing.height(12),
               // --- Email Verified Subtext ---
               Text(
                 'Email verified Successfully',
@@ -55,7 +56,6 @@ class VerifySuccess_view extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              Spacer(flex: 1),
             ],
           ),
         ),

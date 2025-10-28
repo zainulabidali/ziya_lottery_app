@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lottery_app/core/constants/app_colors.dart';
-import 'package:lottery_app/providers.dart/auth_provider.dart';
-import 'package:lottery_app/screens/auth/forgot_password_view.dart';
-import 'package:lottery_app/screens/auth/verify_success.dart';
+import 'package:lottery_app/screens/auth/constants/app_colors.dart';
+import 'package:lottery_app/screens/auth/constants/spacing.dart';
+import 'package:lottery_app/screens/auth/providers/auth_provider.dart';
+import 'package:lottery_app/screens/auth/screens/sign_in_view.dart';
+import 'package:lottery_app/screens/auth/screens/verify_success.dart';
 import 'package:provider/provider.dart';
-import '../../../core/constants/app_strings.dart';
-import '../../../core/components/custom_button.dart';
-import '../../../core/components/custom_textfield.dart';
-import '../../../core/components/spacing.dart';
-import '../../../controllers/auth_controller.dart';
+import '../constants/app_strings.dart';
+import '../components/custom_button.dart';
+import '../components/custom_textfield.dart';
 
 class CreateNewPass_view extends StatelessWidget {
   const CreateNewPass_view({super.key});
@@ -57,41 +56,49 @@ class CreateNewPass_view extends StatelessWidget {
                       topRight: Radius.circular(40.r),
                     ),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Spacing.height(30.h),
-                      CustomTextField(
-                        label: AppStrings.newPass,
-                        obscure: true,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 30.0, right: 30.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Spacing.height(30.h),
+                        textfild_text_widget(Textlabel: AppStrings.newPass),
 
-                        hint: '******',
-                        controller: phoneController, suffixcolor: Colors.grey, 
-                      ),
-                      Spacing.height(20),
-                      CustomTextField(
-                        label: AppStrings.conformPass,
-                        hint: '******',
-                        controller: passController,
-                        
-                        obscure: true, suffixcolor: Colors.grey,
-                      ),
-                     
-                      Spacing.height(70),
-                      CustomButton(
-                        text: AppStrings.resetPass,
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const VerifySuccess_view(),
-                            ),
-                          );
-                        }
-                      ),
-                      Spacing.height(20),
-                    
-                    ],
+                        CustomTextField(
+                          // label: AppStrings.newPass,
+                          obscure: true,
+
+                          hint: '******',
+                          controller: phoneController,
+                          suffixcolor: Colors.black,
+                        ),
+                        Spacing.height(40),
+                        textfild_text_widget(Textlabel: AppStrings.conformPass),
+                        CustomTextField(
+                          // label: AppStrings.conformPass,
+                          hint: '******',
+                          controller: passController,
+
+                          obscure: true,
+                          suffixcolor: Colors.black,
+                        ),
+
+                        Spacing.height(70),
+                        CustomButton(
+                          text: AppStrings.resetPass,
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const VerifySuccess_view(),
+                              ),
+                            );
+                          },
+                        ),
+                        Spacing.height(20),
+                      ],
+                    ),
                   ),
                 ),
               ],

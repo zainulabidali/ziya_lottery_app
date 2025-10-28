@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../constants/app_colors.dart';
 
 class CustomTextField extends StatelessWidget {
-  final String label;
   final String hint;
   final TextEditingController controller;
   final bool obscure;
@@ -11,7 +10,6 @@ class CustomTextField extends StatelessWidget {
 
   const CustomTextField({
     super.key,
-    required this.label,
     required this.hint,
     required this.controller,
     this.obscure = false,
@@ -25,15 +23,15 @@ class CustomTextField extends StatelessWidget {
       obscureText: obscure,
       keyboardType: keyboardType,
       decoration: InputDecoration(
-        suffixIcon: Icon(Icons.visibility_off, color: suffixcolor),
-        labelText: label,
+        suffixIcon: Icon(Icons.visibility_off_outlined, color: suffixcolor),
         hintText: hint,
+        hintStyle: const TextStyle(color: Color.fromARGB(255, 168, 167, 167),fontSize: 16),
         labelStyle: const TextStyle(color: Color.fromARGB(255, 42, 41, 41),fontSize: 18),
         enabledBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: AppColors.grey),
         ),
         focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColors.primaryBlue),
+          borderSide: BorderSide(color: Color.fromARGB(255, 39, 40, 40)),
         ),
       ),
     );
