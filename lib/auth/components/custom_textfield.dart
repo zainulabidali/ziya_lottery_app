@@ -13,7 +13,8 @@ class CustomTextField extends StatelessWidget {
     required this.hint,
     required this.controller,
     this.obscure = false,
-    this.keyboardType = TextInputType.text, required this.suffixcolor,
+    this.keyboardType = TextInputType.text,
+    required this.suffixcolor,
   });
 
   @override
@@ -23,16 +24,21 @@ class CustomTextField extends StatelessWidget {
       obscureText: obscure,
       keyboardType: keyboardType,
       decoration: InputDecoration(
-        suffixIcon: Icon(Icons.visibility_off_outlined, color: suffixcolor),
         hintText: hint,
-        hintStyle: const TextStyle(color: Color.fromARGB(255, 168, 167, 167),fontSize: 16),
-        labelStyle: const TextStyle(color: Color.fromARGB(255, 42, 41, 41),fontSize: 18),
+        hintStyle: const TextStyle(
+          color: Color.fromARGB(255, 168, 167, 167),
+          fontSize: 19,
+        ),
+
+        suffixIcon: Icon(Icons.visibility_off_outlined, color: suffixcolor),
         enabledBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: AppColors.grey),
         ),
         focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: Color.fromARGB(255, 39, 40, 40)),
         ),
+        // ↓ Add this line to adjust vertical alignment
+        contentPadding: const EdgeInsets.only(top: 15, bottom: 0),
       ),
     );
   }

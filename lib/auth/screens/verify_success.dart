@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lottery_app/screens/auth/constants/spacing.dart';
+import 'package:lottery_app/auth/constants/spacing.dart';
 import 'package:lottie/lottie.dart';
 
 class VerifySuccess_view extends StatelessWidget {

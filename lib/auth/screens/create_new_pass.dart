@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lottery_app/screens/auth/constants/app_colors.dart';
-import 'package:lottery_app/screens/auth/constants/spacing.dart';
-import 'package:lottery_app/screens/auth/providers/auth_provider.dart';
-import 'package:lottery_app/screens/auth/screens/sign_in_view.dart';
-import 'package:lottery_app/screens/auth/screens/verify_success.dart';
+import 'package:lottery_app/auth/constants/app_colors.dart';
+import 'package:lottery_app/auth/constants/spacing.dart';
+import 'package:lottery_app/auth/providers/auth_provider.dart';
+import 'package:lottery_app/auth/screens/sign_in_view.dart';
+import 'package:lottery_app/auth/screens/verify_success.dart';
 import 'package:provider/provider.dart';
 import '../constants/app_strings.dart';
 import '../components/custom_button.dart';
@@ -84,17 +84,20 @@ class CreateNewPass_view extends StatelessWidget {
                         ),
 
                         Spacing.height(70),
-                        CustomButton(
-                          text: AppStrings.resetPass,
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const VerifySuccess_view(),
-                              ),
-                            );
-                          },
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: CustomButton(
+                            text: AppStrings.resetPass,
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const VerifySuccess_view(),
+                                ),
+                              );
+                            },
+                          ),
                         ),
                         Spacing.height(20),
                       ],

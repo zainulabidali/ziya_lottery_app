@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lottery_app/screens/auth/constants/spacing.dart';
-import 'package:lottery_app/screens/auth/providers/auth_provider.dart';
-import 'package:lottery_app/screens/auth/screens/create_account.dart';
-import 'package:lottery_app/screens/auth/screens/sign_in_view.dart';
-import 'package:lottery_app/screens/auth/screens/verify_account.dart';
+import 'package:lottery_app/auth/constants/spacing.dart';
+import 'package:lottery_app/auth/providers/auth_provider.dart';
+import 'package:lottery_app/auth/screens/create_account.dart';
+import 'package:lottery_app/auth/screens/sign_in_view.dart';
+import 'package:lottery_app/auth/screens/verify_account.dart';
 import 'package:provider/provider.dart';
 import '../constants/app_strings.dart';
 import '../components/custom_button.dart';
@@ -71,16 +71,19 @@ class ForgotPasswordView extends StatelessWidget {
                           suffixcolor: Colors.white,
                         ),
                         Spacing.height(45),
-                        CustomButton(
-                          text: AppStrings.sentCode,
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => VerifyAccount_view(),
-                              ),
-                            );
-                          },
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: CustomButton(
+                            text: AppStrings.sentCode,
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => VerifyAccount_view(),
+                                ),
+                              );
+                            },
+                          ),
                         ),
                         Spacing.height(20),
                         Center(

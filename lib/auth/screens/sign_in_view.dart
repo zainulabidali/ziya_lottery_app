@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lottery_app/screens/auth/constants/app_colors.dart';
-import 'package:lottery_app/screens/auth/constants/spacing.dart';
-import 'package:lottery_app/screens/auth/providers/auth_provider.dart';
-import 'package:lottery_app/screens/auth/screens/create_account.dart';
-import 'package:lottery_app/screens/auth/screens/forgot_password_view.dart'
+import 'package:lottery_app/auth/constants/app_colors.dart';
+import 'package:lottery_app/auth/constants/spacing.dart';
+import 'package:lottery_app/auth/providers/auth_provider.dart';
+import 'package:lottery_app/auth/screens/create_account.dart';
+import 'package:lottery_app/auth/screens/forgot_password_view.dart'
     hide donthave;
 import 'package:provider/provider.dart';
 import '../constants/app_strings.dart';
@@ -114,9 +114,12 @@ class SignInView extends StatelessWidget {
                           ],
                         ),
                         Spacing.height(30),
-                        CustomButton(
-                          text: AppStrings.signIn,
-                          onPressed: () => AuthController.handleSignIn(context),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: CustomButton(
+                            text: AppStrings.signIn,
+                            onPressed: () => AuthController.handleSignIn(context),
+                          ),
                         ),
                         Spacing.height(10),
                         Center(

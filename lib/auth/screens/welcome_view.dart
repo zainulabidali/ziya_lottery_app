@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lottery_app/screens/auth/screens/create_account.dart';
-import 'package:lottery_app/screens/auth/screens/sign_in_view.dart';
+import 'package:lottery_app/auth/screens/create_account.dart';
+import 'package:lottery_app/auth/screens/sign_in_view.dart';
 import '../constants/app_strings.dart';
 import '../components/gradient_background.dart';
 

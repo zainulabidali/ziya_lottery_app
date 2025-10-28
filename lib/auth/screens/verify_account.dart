@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lottery_app/screens/auth/constants/spacing.dart';
-import 'package:lottery_app/screens/auth/screens/create_new_pass.dart';
-import 'package:lottery_app/screens/auth/screens/forgot_password_view.dart';
-import 'package:lottery_app/screens/auth/screens/sign_in_view.dart' hide bg_top_widget;
+import 'package:lottery_app/auth/constants/spacing.dart';
+import 'package:lottery_app/auth/screens/create_new_pass.dart';
+import 'package:lottery_app/auth/screens/forgot_password_view.dart';
+import 'package:lottery_app/auth/screens/sign_in_view.dart' hide bg_top_widget;
 import '../constants/app_strings.dart';
 import '../components/custom_button.dart';
 
@@ -120,16 +120,19 @@ class VerifyAccount_view extends StatelessWidget {
                         ),
                     
                         Spacing.height(30),
-                        CustomButton(
-                          text: AppStrings.verify,
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => CreateNewPass_view(),
-                              ),
-                            );
-                          },
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: CustomButton(
+                            text: AppStrings.verify,
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CreateNewPass_view(),
+                                ),
+                              );
+                            },
+                          ),
                         ),
                         Spacing.height(20),
                         Center(
