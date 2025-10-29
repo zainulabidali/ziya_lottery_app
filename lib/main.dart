@@ -6,6 +6,7 @@ import 'package:lottery_app/auth/providers/auth_provider.dart';
 import 'package:lottery_app/auth/screens/forgot_password_view.dart';
 import 'package:lottery_app/auth/screens/sign_in_view.dart';
 import 'package:lottery_app/auth/screens/welcome_view.dart';
+import 'package:lottery_app/home/home_screen/home_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -17,12 +18,12 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(const AuthApp());
+  runApp(const lottery_App());
 }
 
 
-class AuthApp extends StatelessWidget {
-  const AuthApp({super.key});
+class lottery_App extends StatelessWidget {
+  const lottery_App({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +40,9 @@ class AuthApp extends StatelessWidget {
             theme: ThemeData(fontFamily: 'Poppins'),
             initialRoute: '/',
             routes: {
-              '/': (context) => const WelcomeView(),
-              '/signin': (context) => const SignInView(),
-              '/forgot-password': (context) => const ForgotPasswordView(),
+              '/': (context) => const HomeScreen(),
+              // '/signin': (context) => const SignInView(),
+              // '/forgot-password': (context) => const ForgotPasswordView(),
             },
           );
         },
