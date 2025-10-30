@@ -4,7 +4,7 @@ import 'package:lottery_app/home/constants/app_colors.dart';
 class PlanCard extends StatefulWidget {
   final String planName;
   final String planType;
-  final String planStatus; // 'free', 'upgrade', 'basic'
+  final String planStatus; // 'free', 'upgrade', 'basic', 'premium', 'elite'
 
   const PlanCard({
     super.key,
@@ -20,7 +20,13 @@ class PlanCard extends StatefulWidget {
 class _PlanCardState extends State<PlanCard> {
   late String currentStatus;
 
-  final List<String> availablePlans = ['free', 'basic', 'upgrade', 'premium'];
+  final List<String> availablePlans = [
+    'free',
+    'upgrade',
+    'basic',
+    'elite',
+    'premium',
+  ];
 
   @override
   void initState() {
@@ -40,83 +46,148 @@ class _PlanCardState extends State<PlanCard> {
   Widget build(BuildContext context) {
     String badgeText = '';
     Color badgeColor = Colors.transparent;
+    String topImage = '';
+    String title = '';
+    String subtitle = '';
+    Color subtitleColor = Colors.white;
+    Color badgeTextColor = Colors.white; // Default value
+    Color titleColor = Colors.white;
 
+    // ---- Customize each plan ----
     switch (currentStatus) {
       case 'free':
         badgeText = 'Free Plan';
         badgeColor = AppColors.kGreen;
+        topImage = '';
+        title = 'Current Plan';
+        subtitle = 'Limited Access';
+        subtitleColor = Colors.white;
         break;
+
       case 'upgrade':
         badgeText = 'Upgrade Plan';
-        badgeColor = Colors.orange;
+        badgeTextColor = const Color.fromARGB(255, 218, 197, 11);
+        // badgeColor = Colors.amber;
+
+        topImage = 'assets/images/Upgrade.png';
+        title = 'Current Plan';
+        subtitle = 'Limited Access over';
+        subtitleColor = Colors.redAccent;
         break;
+
       case 'basic':
         badgeText = 'Basic Plan';
-        badgeColor = Colors.blue;
+        // badgeColor = Colors.blueAccent;
+        topImage = 'assets/images/star.png';
+        title = 'Active Plan';
+        titleColor = const Color.fromARGB(255, 68, 207, 105);
+        subtitle = '10 Changes';
+        subtitleColor = Colors.white;
         break;
+
+      case 'elite':
+        badgeText = 'Elite Plan';
+        // badgeColor = Colors.teal;
+        topImage = 'assets/images/Vip 2 Line.png';
+        titleColor = const Color.fromARGB(255, 68, 207, 105);
+
+        title = 'Active Plan';
+        subtitle = '10 chances';
+        subtitleColor = Colors.white;
+        break;
+
       case 'premium':
         badgeText = 'Premium Plan';
-        badgeColor = Colors.purple;
+        // badgeColor = Colors.purple;
+        topImage = 'assets/images/—Pngtree—diamond icon_4566845.png';
+        title = 'Active Plan';
+        titleColor = const Color.fromARGB(255, 68, 207, 105);
+
+        subtitle = '10 chances';
+        subtitleColor = const Color.fromARGB(255, 228, 228, 228);
         break;
     }
 
     return GestureDetector(
-      onTap: switchPlan, // tap to switch plan
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 7),
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          image: DecorationImage(
-            image: const AssetImage('assets/images/plancard.jpg'),
-            fit: BoxFit.fill,
-            colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.3),
-              BlendMode.darken,
+      onTap: switchPlan,
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 7),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              image: DecorationImage(
+                image: const AssetImage('assets/images/plancard.jpg'),
+                fit: BoxFit.cover,
+                colorFilter: ColorFilter.mode(
+                  const Color.fromARGB(203, 55, 139, 203),
+                  BlendMode.srcATop,
+                ),
+              ),
+              border: Border.all(
+                color: const Color.fromARGB(255, 207, 206, 206),
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // Left side texts
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: titleColor,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      subtitle,
+                      style: TextStyle(color: subtitleColor, fontSize: 10),
+                    ),
+                  ],
+                ),
+
+                // Right side badge
+                Column(
+                  children: [
+                    if (topImage.isNotEmpty)
+                      Image.asset(
+                        topImage,
+                        height: 15,
+                        width: 15,
+                        fit: BoxFit.contain,
+                      ),
+                    // const SizedBox(height: 4),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: badgeColor,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        badgeText,
+                        style: TextStyle(
+                          color: badgeTextColor,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 8,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
-          color: const Color.fromARGB(255, 173, 175, 177).withOpacity(0.2),
-          border: Border.all(color: const Color.fromARGB(255, 206, 206, 206)),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(
-                widget.planName,
-                style: const TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.kWhite,
-                ),
-              ),
-              Text(
-                widget.planType,
-                style: const TextStyle(
-                  color: AppColors.kWhite,
-                  fontSize: 10,
-                ),
-              ),
-            ]),
-            if (badgeText.isNotEmpty)
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                decoration: BoxDecoration(
-                  color: badgeColor,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Text(
-                  badgeText,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 8,
-                  ),
-                ),
-              ),
-          ],
-        ),
+        ],
       ),
     );
   }

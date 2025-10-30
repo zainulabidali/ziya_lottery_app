@@ -89,7 +89,7 @@ class CustomAppBar extends StatelessWidget {
           PlanCard(
             planName: AppStrings.currentPlan,
             planType: AppStrings.limitedAccess,
-            planStatus: 'free', 
+            planStatus: 'free', // 'upgrade', 'basic', 'elite', 'premium', 'today', 
           ),
           
         ],

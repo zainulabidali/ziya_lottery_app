@@ -8,5 +8,9 @@ class AppColors {
   static const Color grey = Color(0xFFC1C1C1);
 }
 
-class fromARGB {
-}
+  const List<Color> kGradientColors = [
+    Color.fromARGB(0, 5, 91, 157),
+    Color(0xFF448AFF),
+  ];
+
+ 
