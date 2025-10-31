@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lottery_app/core/components/lottery_card.dart';
+import 'package:lottery_app/home/components/lottery_card.dart';
 
 class lottary_wedgets extends StatelessWidget {
   const lottary_wedgets({

@@ -7,6 +7,7 @@ import 'package:lottery_app/auth/screens/forgot_password_view.dart';
 import 'package:lottery_app/auth/screens/sign_in_view.dart';
 import 'package:lottery_app/auth/screens/welcome_view.dart';
 import 'package:lottery_app/home/home_screen/home_screen.dart';
+import 'package:lottery_app/home/controller/plancard_controller.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -14,13 +15,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Initialize Firebase
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(const lottery_App());
 }
-
 
 class lottery_App extends StatelessWidget {
   const lottery_App({super.key});
@@ -28,7 +26,10 @@ class lottery_App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => AuthProvider())],
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => PlanController()),
+      ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
         minTextAdapt: true,

@@ -1,15 +1,22 @@
-import 'package:flutter/material.dart' show StatelessWidget, BuildContext, Padding, Widget, SizedBox, Spacer, BoxDecoration, EdgeInsets, CrossAxisAlignment, Alignment, LinearGradient, BorderRadius, Image, BoxFit, Center, Container, FontWeight, Color, TextStyle, Text, Colors, Column, Radius, Row, BoxShape;
+import 'package:flutter/material.dart';
 import 'package:lottery_app/auth/constants/spacing.dart';
 import 'package:lottery_app/home/constants/app_colors.dart' show AppColors;
-import 'package:lottery_app/home/home_screen/home_screen.dart';
 
-class recent_firstpricewinner_widget extends StatelessWidget {
-  const recent_firstpricewinner_widget({super.key});
+class recent_firstpricewinner_widget extends StatefulWidget {
+  final int currentPage;
+  const recent_firstpricewinner_widget({super.key, this.currentPage = 0});
 
+  @override
+  State<recent_firstpricewinner_widget> createState() =>
+      _recent_firstpricewinner_widgetState();
+}
+
+class _recent_firstpricewinner_widgetState
+    extends State<recent_firstpricewinner_widget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -59,45 +66,47 @@ class recent_firstpricewinner_widget extends StatelessWidget {
 
           const Spacer(),
 
+          // Indicators for winner cards
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                height: 4,
-                width: 17,
-                decoration: const BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.all(Radius.circular(3)),
-                ),
+               
               ),
-              Spacing.width(2),
-              dotwidget(),
-              Spacing.width(2),
-              dotwidget(),
-              Spacing.width(2),
-
-              dotwidget(),
-              Spacing.width(2),
-              dotwidget(),
+              Spacing.width(4), // Increased spacing from 3 to 4
+              DotWidget(isActive: widget.currentPage == 0),
+              Spacing.width(4), // Increased spacing from 3 to 4
+              DotWidget(isActive: widget.currentPage == 1),
+              Spacing.width(4), // Increased spacing from 3 to 4
+              DotWidget(isActive: widget.currentPage == 2),
+              Spacing.width(4), // Increased spacing from 3 to 4
+              DotWidget(isActive: widget.currentPage == 3),
             ],
           ),
+
+          // Indicators are now handled in the home screen
         ],
       ),
     );
   }
 }
 
+// Updated dotwidget to support active state
+class DotWidget extends StatelessWidget {
+  final bool isActive;
 
-class dotwidget extends StatelessWidget {
-  const dotwidget({super.key});
+  const DotWidget({super.key, this.isActive = false});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 4,
-      width: 4,
-      decoration: const BoxDecoration(
-        color: Colors.grey,
-        shape: BoxShape.circle,
+      height: isActive ? 5 : 5, // both have same height (5)
+      width: isActive ? 16 : 5, // active = 16, inactive = 5
+      decoration: BoxDecoration(
+        color: isActive
+            ? const Color.fromARGB(255, 25, 169, 30)
+            : Colors.grey,
+        borderRadius: BorderRadius.circular(8), // smooth pill look
       ),
     );
   }

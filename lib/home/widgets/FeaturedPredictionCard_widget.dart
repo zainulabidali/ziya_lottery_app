@@ -32,7 +32,7 @@ class FeaturedPredictionCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    GestureDetector(
+                    GestureDetector( 
                       onTap: () {},
                       child: Row(
                         children: [

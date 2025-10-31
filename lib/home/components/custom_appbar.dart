@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lottery_app/auth/constants/spacing.dart';
-import 'package:lottery_app/core/components/plan_card.dart';
+import 'package:lottery_app/home/components/plan_card.dart';
 import 'package:lottery_app/home/constants/app_colors.dart';
 import 'package:lottery_app/home/constants/strings_home.dart';
 import 'package:lottery_app/home/widgets/FeaturedPredictionCard_widget.dart';
+import 'package:provider/provider.dart';
+import 'package:lottery_app/home/controller/plancard_controller.dart';
+import 'package:lottery_app/home/models/plancard_model.dart';
 
 class CustomAppBar extends StatefulWidget {
   final String title;
@@ -16,12 +19,10 @@ class CustomAppBar extends StatefulWidget {
 }
 
 class _CustomAppBarState extends State<CustomAppBar> {
-  bool showPrediction = false;
-
   void handlePlanCycleComplete() {
-    setState(() {
-      showPrediction = true;
-    });
+    // Get the controller and cycle to next plan
+    final controller = Provider.of<PlanController>(context, listen: false);
+    controller.cycleToNextPlan();
   }
 
   @override
@@ -100,14 +101,18 @@ class _CustomAppBarState extends State<CustomAppBar> {
 
           // ---- PlanCard ----
           const SizedBox(height: 6),
-          showPrediction
-              ? const FeaturedPredictionCard()
-              : PlanCard(
-                  planName: 'Free Plan',
-                  planType: 'free',
-                  planStatus: 'free',
+          Consumer<PlanController>(
+            builder: (context, controller, child) {
+              if (controller.showFeatured) {
+                return const FeaturedPredictionCard();
+              } else {
+                return PlanCard(
+                  plan: controller.currentPlan!,
                   onPlanCycleComplete: handlePlanCycleComplete,
-                ),
+                );
+              }
+            },
+          ),
         ],
       ),
     );

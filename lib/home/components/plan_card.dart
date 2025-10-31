@@ -1,26 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:lottery_app/home/constants/app_colors.dart';
+import 'package:lottery_app/home/models/plancard_model.dart';
 
 class PlanCard extends StatefulWidget {
-  final String planName;
-  final String planType;
-  final String planStatus; // 'free', 'upgrade', 'basic', 'elite', 'premium'
-  final VoidCallback? onPlanCycleComplete; // callback to parent
+  final PlanModel plan;
+  final VoidCallback? onPlanCycleComplete;
 
-  const PlanCard({
-    super.key,
-    required this.planName,
-    required this.planType,
-    required this.planStatus,
-    this.onPlanCycleComplete,
-  });
+  const PlanCard({super.key, required this.plan, this.onPlanCycleComplete});
 
   @override
   State<PlanCard> createState() => _PlanCardState();
 }
 
 class _PlanCardState extends State<PlanCard> {
-  late String currentStatus;
+  late PlanModel currentPlan;
 
   final List<String> availablePlans = [
     'free',
@@ -33,11 +26,11 @@ class _PlanCardState extends State<PlanCard> {
   @override
   void initState() {
     super.initState();
-    currentStatus = widget.planStatus;
+    currentPlan = widget.plan;
   }
 
   void switchPlan() {
-    final currentIndex = availablePlans.indexOf(currentStatus);
+    final currentIndex = availablePlans.indexOf(currentPlan.planType);
 
     // If last (premium), notify parent
     if (currentIndex == availablePlans.length - 1) {
@@ -47,61 +40,35 @@ class _PlanCardState extends State<PlanCard> {
 
     final nextIndex = (currentIndex + 1) % availablePlans.length;
     setState(() {
-      currentStatus = availablePlans[nextIndex];
+      currentPlan = PlanModel.fromType(availablePlans[nextIndex]);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    String badgeText = '';
     Color badgeColor = Colors.transparent;
-    String topImage = '';
-    String title = '';
-    String subtitle = '';
     Color subtitleColor = Colors.white;
     Color badgeTextColor = Colors.white;
     Color titleColor = Colors.white;
 
-    switch (currentStatus) {
+    // Set colors based on plan type
+    switch (currentPlan.planType) {
       case 'free':
-        badgeText = 'Free Plan';
         badgeColor = AppColors.kGreen;
-        title = 'Current Plan';
-        subtitle = 'Limited Access';
         break;
 
       case 'upgrade':
-        badgeText = 'Upgrade Plan';
         badgeTextColor = const Color.fromARGB(255, 218, 197, 11);
-        topImage = 'assets/images/Upgrade.png';
-        title = 'Current Plan';
-        subtitle = 'Limited Access over';
         subtitleColor = Colors.redAccent;
         break;
 
       case 'basic':
-        badgeText = 'Basic Plan';
-        topImage = 'assets/images/outline-star-xxl.png';
-        title = 'Active Plan';
-        titleColor = const Color(0xFF6AE576);
-        subtitle = '10 Changes';
-        break;
-
       case 'elite':
-        badgeText = 'Elite Plan';
-        topImage = 'assets/images/Vip 2 Line.png';
-        title = 'Active Plan';
-        titleColor = const Color(0xFF6AE576);
-        subtitle = '10 Chances';
-        break;
-
       case 'premium':
-        badgeText = 'Premium Plan';
-        topImage = 'assets/images/—Pngtree—diamond icon_4566845.png';
-        title = 'Active Plan';
         titleColor = const Color(0xFF6AE576);
-        subtitle = '10 Chances';
-        subtitleColor = const Color.fromARGB(255, 228, 228, 228);
+        if (currentPlan.planType == 'premium') {
+          subtitleColor = const Color.fromARGB(255, 228, 228, 228);
+        }
         break;
     }
 
@@ -135,7 +102,7 @@ class _PlanCardState extends State<PlanCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      title,
+                      currentPlan.title,
                       style: TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
@@ -144,7 +111,7 @@ class _PlanCardState extends State<PlanCard> {
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      subtitle,
+                      currentPlan.subtitle,
                       style: TextStyle(color: subtitleColor, fontSize: 10),
                     ),
                   ],
@@ -152,9 +119,10 @@ class _PlanCardState extends State<PlanCard> {
                 // Right badge
                 Column(
                   children: [
-                    if (topImage.isNotEmpty)
+                    if (currentPlan.topImage != null &&
+                        currentPlan.topImage!.isNotEmpty)
                       Image.asset(
-                        topImage,
+                        currentPlan.topImage!,
                         height: 14,
                         width: 14,
                         fit: BoxFit.contain,
@@ -169,7 +137,7 @@ class _PlanCardState extends State<PlanCard> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
-                        badgeText,
+                        currentPlan.badgeText,
                         style: TextStyle(
                           color: badgeTextColor,
                           fontWeight: FontWeight.w400,

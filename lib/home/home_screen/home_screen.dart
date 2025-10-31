@@ -4,11 +4,12 @@ import 'package:lottery_app/auth/constants/spacing.dart';
 import 'package:lottery_app/home/constants/app_colors.dart' show AppColors;
 import 'package:lottery_app/home/constants/strings_home.dart';
 import 'package:lottery_app/home/widgets/FeaturedPredictionCard_widget.dart';
+import 'package:lottery_app/home/widgets/ad_bannerimg_widget.dart';
 import 'package:lottery_app/home/widgets/home_header.dart';
 import 'package:lottery_app/home/widgets/lottery_widgets.dart';
 import 'package:lottery_app/home/widgets/recent_winners.widget.dart';
-import '../../core/components/winner_card.dart';
-import '../../core/components/bottom_nav_bar.dart';
+import '../components/winner_card.dart';
+import '../../BottomNavBar/bottom_nav_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,10 +20,51 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
+  int winnerCardCurrentPage = 0;
 
   void onNavTapped(int index) {
     setState(() => selectedIndex = index);
   }
+
+  // List of banner images for the carousel
+  final List<String> bannerImages = [
+    'assets/images/banner_img.png',
+    'assets/images/banner_img.png',
+    'assets/images/banner_img.png',
+    'assets/images/banner_img.png',
+  ];
+
+  // Sample winner data for scrolling
+  final List<Map<String, String>> winnerData = [
+    {
+      'name': 'Anithya Suresh',
+      'lottery': 'Bhagyathara',
+      'ticket': 'NG-789012',
+      'location': 'Kollam, Kerala',
+      'date': '15 Oct 2025',
+    },
+    {
+      'name': 'Rajesh Kumar',
+      'lottery': 'Lucky Draw',
+      'ticket': 'LD-456789',
+      'location': 'Bangalore, Karnataka',
+      'date': '14 Oct 2025',
+    },
+    {
+      'name': 'Priya Sharma',
+      'lottery': 'Golden Ticket',
+      'ticket': 'GT-123456',
+      'location': 'Mumbai, Maharashtra',
+      'date': '13 Oct 2025',
+    },
+    {
+      'name': 'Mohammed Ali',
+      'lottery': 'Fortune Wheel',
+      'ticket': 'FW-987654',
+      'location': 'Hyderabad, Telangana',
+      'date': '12 Oct 2025',
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -33,24 +75,38 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: [
               const HomeHeader(),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 43.w, vertical: 5.h),
-                child: Image.asset(
-                  'assets/images/banner_img.png',
-                  width: 296.w,
-                  height: 106.h,
+              // Replaced single image with scrollable image list
+              ad_bannerimg_widget(bannerImages: bannerImages),
+              Spacing.height(2),
+
+              // Make recent winners section scrollable with indicators
+              recent_firstpricewinner_widget(
+                currentPage: winnerCardCurrentPage,
+              ),
+
+              // Scrollable WinnerCard section
+              Container(
+                height: 160, // Adjust based on card height
+                child: PageView.builder(
+                  itemCount: winnerData.length,
+                  onPageChanged: (index) {
+                    setState(() {
+                      winnerCardCurrentPage = index;
+                    });
+                  },
+                  itemBuilder: (context, index) {
+                    final winner = winnerData[index];
+                    return WinnerCard(
+                      name: winner['name']!,
+                      lottery: winner['lottery']!,
+                      ticket: winner['ticket']!,
+                      location: winner['location']!,
+                      date: winner['date']!,
+                    );
+                  },
                 ),
               ),
-              Spacing.height(2),
-              recent_firstpricewinner_widget(),
 
-              const WinnerCard(
-                name: 'Anithya Suresh',
-                lottery: 'Bhagyathara',
-                ticket: 'NG-789012',
-                location: 'Kollam, Kerala',
-                date: '15 Oct 2025',
-              ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
                 child: Row(
