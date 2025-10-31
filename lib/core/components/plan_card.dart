@@ -4,13 +4,15 @@ import 'package:lottery_app/home/constants/app_colors.dart';
 class PlanCard extends StatefulWidget {
   final String planName;
   final String planType;
-  final String planStatus; // 'free', 'upgrade', 'basic', 'premium', 'elite'
+  final String planStatus; // 'free', 'upgrade', 'basic', 'elite', 'premium'
+  final VoidCallback? onPlanCycleComplete; // callback to parent
 
   const PlanCard({
     super.key,
     required this.planName,
     required this.planType,
     required this.planStatus,
+    this.onPlanCycleComplete,
   });
 
   @override
@@ -36,6 +38,13 @@ class _PlanCardState extends State<PlanCard> {
 
   void switchPlan() {
     final currentIndex = availablePlans.indexOf(currentStatus);
+
+    // If last (premium), notify parent
+    if (currentIndex == availablePlans.length - 1) {
+      widget.onPlanCycleComplete?.call();
+      return;
+    }
+
     final nextIndex = (currentIndex + 1) % availablePlans.length;
     setState(() {
       currentStatus = availablePlans[nextIndex];
@@ -50,25 +59,20 @@ class _PlanCardState extends State<PlanCard> {
     String title = '';
     String subtitle = '';
     Color subtitleColor = Colors.white;
-    Color badgeTextColor = Colors.white; // Default value
+    Color badgeTextColor = Colors.white;
     Color titleColor = Colors.white;
 
-    // ---- Customize each plan ----
     switch (currentStatus) {
       case 'free':
         badgeText = 'Free Plan';
         badgeColor = AppColors.kGreen;
-        topImage = '';
         title = 'Current Plan';
         subtitle = 'Limited Access';
-        subtitleColor = Colors.white;
         break;
 
       case 'upgrade':
         badgeText = 'Upgrade Plan';
         badgeTextColor = const Color.fromARGB(255, 218, 197, 11);
-        // badgeColor = Colors.amber;
-
         topImage = 'assets/images/Upgrade.png';
         title = 'Current Plan';
         subtitle = 'Limited Access over';
@@ -77,33 +81,26 @@ class _PlanCardState extends State<PlanCard> {
 
       case 'basic':
         badgeText = 'Basic Plan';
-        // badgeColor = Colors.blueAccent;
-        topImage = 'assets/images/star.png';
+        topImage = 'assets/images/outline-star-xxl.png';
         title = 'Active Plan';
-        titleColor = const Color.fromARGB(255, 68, 207, 105);
+        titleColor = const Color(0xFF6AE576);
         subtitle = '10 Changes';
-        subtitleColor = Colors.white;
         break;
 
       case 'elite':
         badgeText = 'Elite Plan';
-        // badgeColor = Colors.teal;
         topImage = 'assets/images/Vip 2 Line.png';
-        titleColor = const Color.fromARGB(255, 68, 207, 105);
-
         title = 'Active Plan';
-        subtitle = '10 chances';
-        subtitleColor = Colors.white;
+        titleColor = const Color(0xFF6AE576);
+        subtitle = '10 Chances';
         break;
 
       case 'premium':
         badgeText = 'Premium Plan';
-        // badgeColor = Colors.purple;
         topImage = 'assets/images/—Pngtree—diamond icon_4566845.png';
         title = 'Active Plan';
-        titleColor = const Color.fromARGB(255, 68, 207, 105);
-
-        subtitle = '10 chances';
+        titleColor = const Color(0xFF6AE576);
+        subtitle = '10 Chances';
         subtitleColor = const Color.fromARGB(255, 228, 228, 228);
         break;
     }
@@ -133,7 +130,7 @@ class _PlanCardState extends State<PlanCard> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Left side texts
+                // Left texts
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -152,22 +149,20 @@ class _PlanCardState extends State<PlanCard> {
                     ),
                   ],
                 ),
-
-                // Right side badge
+                // Right badge
                 Column(
                   children: [
                     if (topImage.isNotEmpty)
                       Image.asset(
                         topImage,
-                        height: 15,
-                        width: 15,
+                        height: 14,
+                        width: 14,
                         fit: BoxFit.contain,
                       ),
-                    // const SizedBox(height: 4),
                     Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 12,
-                        vertical: 4,
+                        vertical: 1,
                       ),
                       decoration: BoxDecoration(
                         color: badgeColor,
@@ -177,8 +172,8 @@ class _PlanCardState extends State<PlanCard> {
                         badgeText,
                         style: TextStyle(
                           color: badgeTextColor,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 8,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 13,
                         ),
                       ),
                     ),

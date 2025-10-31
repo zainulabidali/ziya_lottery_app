@@ -3,12 +3,26 @@ import 'package:lottery_app/auth/constants/spacing.dart';
 import 'package:lottery_app/core/components/plan_card.dart';
 import 'package:lottery_app/home/constants/app_colors.dart';
 import 'package:lottery_app/home/constants/strings_home.dart';
+import 'package:lottery_app/home/widgets/FeaturedPredictionCard_widget.dart';
 
-class CustomAppBar extends StatelessWidget {
+class CustomAppBar extends StatefulWidget {
   final String title;
   final String userName;
 
   const CustomAppBar({super.key, required this.title, required this.userName});
+
+  @override
+  State<CustomAppBar> createState() => _CustomAppBarState();
+}
+
+class _CustomAppBarState extends State<CustomAppBar> {
+  bool showPrediction = false;
+
+  void handlePlanCycleComplete() {
+    setState(() {
+      showPrediction = true;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +46,7 @@ class CustomAppBar extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
+                    widget.title,
                     style: const TextStyle(
                       color: AppColors.kWhite,
                       fontSize: 20,
@@ -41,7 +55,7 @@ class CustomAppBar extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    userName,
+                    widget.userName,
                     style: const TextStyle(
                       color: AppColors.kWhite,
                       fontSize: 16,
@@ -86,12 +100,14 @@ class CustomAppBar extends StatelessWidget {
 
           // ---- PlanCard ----
           const SizedBox(height: 6),
-          PlanCard(
-            planName: AppStrings.currentPlan,
-            planType: AppStrings.limitedAccess,
-            planStatus: 'free', // 'upgrade', 'basic', 'elite', 'premium', 'today', 
-          ),
-          
+          showPrediction
+              ? const FeaturedPredictionCard()
+              : PlanCard(
+                  planName: 'Free Plan',
+                  planType: 'free',
+                  planStatus: 'free',
+                  onPlanCycleComplete: handlePlanCycleComplete,
+                ),
         ],
       ),
     );
