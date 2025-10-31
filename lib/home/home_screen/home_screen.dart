@@ -10,6 +10,7 @@ import 'package:lottery_app/home/widgets/lottery_widgets.dart';
 import 'package:lottery_app/home/widgets/recent_winners.widget.dart';
 import '../components/winner_card.dart';
 import '../../BottomNavBar/bottom_nav_bar.dart';
+import 'package:lottery_app/result/result_screens/result_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,6 +25,32 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void onNavTapped(int index) {
     setState(() => selectedIndex = index);
+
+    // Navigate based on the selected index
+    switch (index) {
+      case 0: // Home
+        // Already on home screen, no navigation needed
+        break;
+      case 1: // Result
+        // Navigate to result screen
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const LotteryResultScreen()),
+        );
+        break;
+      case 2: // History
+        // Show a snackbar indicating this feature is not implemented yet
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('History feature coming soon!')),
+        );
+        break;
+      case 3: // Profile
+        // Show a snackbar indicating this feature is not implemented yet
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Profile feature coming soon!')),
+        );
+        break;
+    }
   }
 
   // List of banner images for the carousel
