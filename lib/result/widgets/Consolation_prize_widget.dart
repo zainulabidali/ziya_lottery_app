@@ -23,12 +23,12 @@ class Consolation_prize_widget extends StatelessWidget {
         child: !showResults
             ? Center(
                 child: Image.asset(
-                  'assets/images/infratech_ad.png', // <-- your default ad image
+                  'assets/images/result_page_img.png',
                   // fit: BoxFit.contain,
                 ),
               )
             : SingleChildScrollView(
-                child: Padding( 
+                child: Padding(
                   padding: const EdgeInsets.symmetric(
                     vertical: 0,
                     horizontal: 18.0,
@@ -56,14 +56,13 @@ class Consolation_prize_widget extends StatelessWidget {
 
                       // Consolation Prize
                       Container(
-                        margin: EdgeInsets.only(top: 12.h),
-                        padding: EdgeInsets.all(10.w),
+                        margin: EdgeInsets.only(bottom: 10.h),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.r),
                           color: Colors.white,
                           boxShadow: [
                             BoxShadow(
-                              color: const Color.fromARGB(255, 198, 197, 197),
+                              color: const Color.fromARGB(255, 160, 159, 159),
                               blurRadius: 4,
                               offset: const Offset(0, 2),
                             ),
@@ -74,21 +73,26 @@ class Consolation_prize_widget extends StatelessWidget {
                           children: [
                             Container(
                               width: double.infinity,
-                              height: 40.h,
-
+                              padding: EdgeInsets.symmetric(vertical: 8.h),
                               decoration: BoxDecoration(
                                 color: Color(0xFF1976D2),
-                                borderRadius: BorderRadius.circular(8.r),
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(10.r),
+                                  topRight: Radius.circular(10.r),
+                                ),
                               ),
                               alignment: Alignment.center,
-                              child: const Text(
+                              child: Text(
                                 "Consolation Prize",
-                                style: TextStyle(
+
+                                style: const TextStyle(
+                                  fontSize: 18,
                                   color: Colors.white,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
                             ),
+
                             SizedBox(height: 8.h),
                             Text(
                               prizeData["consolationPrize"]["amount"],

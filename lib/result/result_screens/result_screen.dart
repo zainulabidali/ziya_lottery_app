@@ -42,7 +42,9 @@ class _LotteryResultScreenState extends State<LotteryResultScreen> {
           (route) => route.isFirst,
         );
         break;
-      case 1: // Result (current screen)
+      case 1:
+        // Result (current screen)
+
         // Already on result screen, no navigation needed
         break;
       case 2: // History
@@ -125,9 +127,7 @@ class _LotteryResultScreenState extends State<LotteryResultScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Top bar
-
                   result_hedding_widget(),
-
 
                   // Search TextField
                   Padding(
@@ -137,123 +137,182 @@ class _LotteryResultScreenState extends State<LotteryResultScreen> {
                     ),
                     child: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.r),
-                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12.r),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.grey.shade300,
+                            color: const Color.fromARGB(255, 135, 135, 135),
                             blurRadius: 4,
                             offset: const Offset(0, 2),
                           ),
                         ],
                       ),
-                      child: TypeAheadField(
-                        builder: (context, controller, focusNode) {
-                          return TextField(
-                            controller: controller,
-                            focusNode: focusNode,
-                            decoration: InputDecoration(
-                              prefixIcon: const Icon(
-                                Icons.search,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12.r),
+                        child: Row(
+                          children: [
+                            // Blue search icon section
+                            Container(
+                              height: 55.h,
+                              width: 38.w,
+                              decoration: const BoxDecoration(
                                 color: Color(0xFF1976D2),
                               ),
-                              suffixIcon: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    _showSuggestions = !_showSuggestions;
-                                  });
-                                  if (_showSuggestions) {
-                                    focusNode
-                                        .requestFocus(); // Force dropdown open
-                                  } else {
-                                    focusNode.unfocus(); // Close dropdown
-                                  }
-                                },
-                                child: const Icon(
-                                  Icons.arrow_drop_down,
-                                  color: Colors.grey,
+                              child: const Icon(
+                                Icons.search,
+                                color: Colors.white,
+                                size: 24,
+                              ),
+                            ),
+                            // Expanded text field with suggestions
+                            Expanded(
+                              child: Container(
+                                color: Colors.white,
+                                child: TypeAheadField(
+                                  builder: (context, controller, focusNode) {
+                                    return TextField(
+                                      controller: controller,
+                                      focusNode: focusNode,
+                                      textAlign: TextAlign.center,
+
+                                      decoration: InputDecoration(
+                                        hintText: "Enter Number",
+                                        hintStyle: TextStyle(
+                                          color: Colors.grey.shade500,
+                                        ),
+                                        border: InputBorder.none,
+                                        contentPadding: EdgeInsets.symmetric(
+                                          vertical: 14.h,
+                                          horizontal: 12.w,
+                                        ),
+                                        suffixIcon: GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              _showSuggestions =
+                                                  !_showSuggestions;
+                                            });
+                                            if (_showSuggestions) {
+                                              focusNode.requestFocus();
+                                            } else {
+                                              focusNode.unfocus();
+                                            }
+                                          },
+                                          child: const Icon(
+                                            Icons.keyboard_arrow_down_rounded,
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  suggestionsCallback: (pattern) {
+                                    if (pattern.isEmpty && _showSuggestions) {
+                                      return lotteryNumbers;
+                                    }
+                                    return lotteryNumbers
+                                        .where(
+                                          (item) => item.toLowerCase().contains(
+                                            pattern.toLowerCase(),
+                                          ),
+                                        )
+                                        .toList();
+                                  },
+                                  itemBuilder: (context, suggestion) {
+                                    return ListTile(
+                                      leading: const Icon(
+                                        Icons.confirmation_number,
+                                        color: Color(0xFF1976D2),
+                                      ),
+                                      title: Text(
+                                        suggestion,
+                                        style: TextStyle(
+                                          fontSize: 15.sp,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  onSelected: (suggestion) {
+                                    numberController.text = suggestion;
+                                    _focusNode.unfocus();
+                                  },
                                 ),
                               ),
-                              hintText: "Enter Number",
-                              border: InputBorder.none,
-                              contentPadding: EdgeInsets.symmetric(
-                                vertical: 14.h,
-                              ),
                             ),
-                          );
-                        },
-                        suggestionsCallback: (pattern) {
-                          if (pattern.isEmpty && _showSuggestions) {
-                            return lotteryNumbers; // show all if icon pressed
-                          }
-                          return lotteryNumbers
-                              .where(
-                                (item) => item.toLowerCase().contains(
-                                  pattern.toLowerCase(),
-                                ),
-                              )
-                              .toList();
-                        },
-                        itemBuilder: (context, suggestion) {
-                          return ListTile(
-                            leading: const Icon(
-                              Icons.confirmation_number,
-                              color: Color(0xFF1976D2),
-                            ),
-                            title: Text(
-                              suggestion,
-                              style: TextStyle(
-                                fontSize: 15.sp,
-                                color: Colors.black,
-                              ),
-                            ),
-                          );
-                        },
-                        onSelected: (suggestion) {
-                          numberController.text = suggestion;
-                          _focusNode.unfocus();
-                        },
+                          ],
+                        ),
                       ),
                     ),
                   ),
 
                   SizedBox(height: 12.h),
 
-                  // Date picker TextField
+                  // Date Picker TextField (Styled)
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       vertical: 4.0,
                       horizontal: 18.0,
                     ),
-                    child: GestureDetector(
-                      onTap: () => _selectDate(context),
-                      child: AbsorbPointer(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.r),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.shade300,
-                                blurRadius: 4,
-                                offset: const Offset(0, 2),
-                              ),
-                            ],
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12.r),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color.fromARGB(255, 135, 135, 135),
+                            blurRadius: 4,
+                            offset: const Offset(0, 2),
                           ),
-                          child: TextField(
-                            controller: dateController,
-                            decoration: InputDecoration(
-                              prefixIcon: const Icon(
-                                Icons.calendar_month,
+                        ],
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12.r),
+                        child: Row(
+                          children: [
+                            // Blue calendar icon section
+                            Container(
+                              height: 55.h,
+                              width: 38.w,
+                              decoration: const BoxDecoration(
                                 color: Color(0xFF1976D2),
                               ),
-                              hintText: "Select Date",
-                              border: InputBorder.none,
-                              contentPadding: EdgeInsets.symmetric(
-                                vertical: 14.h,
+                              child: const Icon(
+                                Icons.calendar_month,
+                                color: Colors.white,
+                                size: 24,
                               ),
                             ),
-                          ),
+
+                            // Date field (non-editable)
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () => _selectDate(context),
+                                child: AbsorbPointer(
+                                  child: Container(
+                                    color: Colors.white,
+                                    child: TextField(
+                                      controller: dateController,
+                                      textAlign: TextAlign.center,
+
+                                      decoration: InputDecoration(
+                                        hintText: "Select Date",
+                                        hintStyle: TextStyle(
+                                          color: Colors.grey.shade500,
+                                        ),
+                                        border: InputBorder.none,
+                                        contentPadding: EdgeInsets.symmetric(
+                                          vertical: 14.h,
+                                          horizontal: 12.w,
+                                        ),
+                                        suffixIcon: const Icon(
+                                          Icons.keyboard_arrow_down_rounded,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -278,10 +337,13 @@ class _LotteryResultScreenState extends State<LotteryResultScreen> {
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
+                          elevation: 4, // gives shadow depth
+                          shadowColor: const Color.fromARGB(255, 135, 135, 135),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.r),
                           ),
                         ),
+
                         child: Text(
                           "CHECK",
                           style: TextStyle(
@@ -294,7 +356,10 @@ class _LotteryResultScreenState extends State<LotteryResultScreen> {
                   ),
 
                   SizedBox(height: 20.h),
-                  Consolation_prize_widget(showResults: showResults, prizeData: prizeData),
+                  Consolation_prize_widget(
+                    showResults: showResults,
+                    prizeData: prizeData,
+                  ),
                 ],
               ),
             ),
@@ -302,10 +367,10 @@ class _LotteryResultScreenState extends State<LotteryResultScreen> {
         ),
       ),
       // Adding Bottom Navigation Bar
-      bottomNavigationBar: BottomNavBar(
-        selectedIndex: selectedIndex,
-        onItemSelected: onNavTapped,
-      ),
+      // bottomNavigationBar: BottomNavBar(
+      //   selectedIndex: selectedIndex,
+      //   onItemSelected: onNavTapped,
+      // ),
     );
   }
 }

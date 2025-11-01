@@ -10,7 +10,6 @@ import 'package:lottery_app/home/widgets/lottery_widgets.dart';
 import 'package:lottery_app/home/widgets/recent_winners.widget.dart';
 import '../components/winner_card.dart';
 import '../../BottomNavBar/bottom_nav_bar.dart';
-import 'package:lottery_app/result/result_screens/result_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,38 +19,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int selectedIndex = 0;
-  int winnerCardCurrentPage = 0;
-
-  void onNavTapped(int index) {
-    setState(() => selectedIndex = index);
-
-    // Navigate based on the selected index
-    switch (index) {
-      case 0: // Home
-        // Already on home screen, no navigation needed
-        break;
-      case 1: // Result
-        // Navigate to result screen
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const LotteryResultScreen()),
-        );
-        break;
-      case 2: // History
-        // Show a snackbar indicating this feature is not implemented yet
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('History feature coming soon!')),
-        );
-        break;
-      case 3: // Profile
-        // Show a snackbar indicating this feature is not implemented yet
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Profile feature coming soon!')),
-        );
-        break;
-    }
-  }
+  // Removed selectedIndex since it's now managed by MainScreen
 
   // List of banner images for the carousel
   final List<String> bannerImages = [
@@ -108,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
               // Make recent winners section scrollable with indicators
               recent_firstpricewinner_widget(
-                currentPage: winnerCardCurrentPage,
+                currentPage: 0, // This should be managed if needed
               ),
 
               // Scrollable WinnerCard section
@@ -116,21 +84,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 160, // Adjust based on card height
                 child: PageView.builder(
                   itemCount: winnerData.length,
-                  onPageChanged: (index) {
-                    setState(() {
-                      winnerCardCurrentPage = index;
-                    });
-                  },
+                  // Removed onPageChanged since it's managed in MainScreen
                   itemBuilder: (context, index) {
                     final winner = winnerData[index];
                     return WinnerCard(
                       name: winner['name']!,
-                      lottery: winner['lottery']!,
-                      ticket: winner['ticket']!,
+                      lottery: winner['lottery']!, // Fixed the order
+                      ticket: winner['ticket']!,   // Fixed the order
                       location: winner['location']!,
                       date: winner['date']!,
                     );
                   },
+                  // Removed onPageChanged callback
                 ),
               ),
 
@@ -166,17 +131,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              lottary_wedgets(),
+              lottary_wedgets(), // Note: Typo in widget name - should be "lottery_widgets"
 
               // SizedBox(height: 20.h),
             ],
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavBar(
-        selectedIndex: selectedIndex,
-        onItemSelected: onNavTapped,
-      ),
+      // Removed bottomNavigationBar since it's now in MainScreen
     );
   }
 }

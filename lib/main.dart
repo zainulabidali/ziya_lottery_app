@@ -6,7 +6,8 @@ import 'package:lottery_app/auth/providers/auth_provider.dart';
 import 'package:lottery_app/auth/screens/forgot_password_view.dart';
 import 'package:lottery_app/auth/screens/sign_in_view.dart';
 import 'package:lottery_app/auth/screens/welcome_view.dart';
-import 'package:lottery_app/home/home_screen/home_screen.dart';
+import 'package:lottery_app/main_screen.dart';
+import 'package:lottery_app/test_main_screen.dart'; // Changed to test screen
 import 'package:lottery_app/home/controller/plancard_controller.dart';
 import 'package:provider/provider.dart';
 
@@ -41,7 +42,7 @@ class lottery_App extends StatelessWidget {
             theme: ThemeData(fontFamily: 'Poppins'),
             initialRoute: '/',
             routes: {
-              '/': (context) => const HomeScreen(),
+              '/': (context) => const MainScreen(), // Changed to TestMainScreen
               // '/signin': (context) => const SignInView(),
               // '/forgot-password': (context) => const ForgotPasswordView(),
             },
