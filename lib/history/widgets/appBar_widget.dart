@@ -20,7 +20,7 @@ class Appbar_widget extends StatelessWidget {
       ),
       padding: EdgeInsets.only(
         top: 51.h,
-        left: 16.w,
+        left: 5.w,
         right: 16.w,
         bottom: 20.h,
       ),
@@ -34,7 +34,7 @@ class Appbar_widget extends StatelessWidget {
             "Prediction History",
             style: TextStyle(
               color: Colors.white,
-              fontSize: 15.sp,
+              fontSize: 17.sp,
               fontWeight: FontWeight.w600,
             ),
           ),

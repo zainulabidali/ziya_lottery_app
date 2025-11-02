@@ -41,8 +41,8 @@ class PredictionCard_history extends StatelessWidget {
                       ),
                       SizedBox(height: 5.w),
                       Container(
-                        width: 38.w,
-                        height: 17.h,
+                        // width: 38.w,
+                        // height: 17.h,
                         padding: EdgeInsets.symmetric(
                           horizontal: 8.w,
                           vertical: 2.h,
@@ -79,7 +79,7 @@ class PredictionCard_history extends StatelessWidget {
               SizedBox(width: 4.w),
               Text(
                 item['date'],
-                style: TextStyle(color: Colors.grey, fontSize: 9.sp),
+                style: TextStyle(color: const Color.fromARGB(255, 50, 49, 49), fontSize: 9.sp),
               ),
             ],
           ),
@@ -91,19 +91,34 @@ class PredictionCard_history extends StatelessWidget {
           SizedBox(height: 8.h),
           Container(
             width: 332.w,
-            padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),
+            padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
             decoration: BoxDecoration(
               border: Border.all(color: const Color(0xFF2196F3)),
               borderRadius: BorderRadius.circular(6.r),
             ),
-            child: Text(
-              item['ticket'],
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 9.sp,
-                color: const Color(0xFF2196F3),
-                fontWeight: FontWeight.w600,
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  item['ticket'],
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 10.sp,
+                    color: const Color(0xFF2196F3),
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(width: 4.w),
+                Text(
+                  item['ticketnum'],
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 9.sp,
+                    color: const Color.fromARGB(255, 38, 38, 38),
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
             ),
           ),
           if (!isPending) ...[

@@ -18,10 +18,10 @@ class BottomNavBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildNavItem(Icons.home, 'Home', 0),
-          _buildNavItem(Icons.article_outlined, 'Result', 1),
+          _buildNavItem(Icons.home_filled, 'Home', 0),
+          _buildNavItem(Icons.event_repeat_sharp, 'Result', 1),
           _buildNavItem(Icons.history, 'History', 2),
-          _buildNavItem(Icons.person_outline, 'Profile', 3),
+          _buildNavItem(Icons.account_circle_outlined, 'Profile', 3),
         ],
       ),
     );

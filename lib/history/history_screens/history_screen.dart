@@ -21,9 +21,10 @@ class _PredictionHistoryScreenState extends State<PredictionHistoryScreen> {
       'lottery': 'Win Win',
       'date': '25-10-2025',
       'prize': '1st prize',
-      'ticket': 'WN 432456',
+      'ticket': 'WN',
+      'ticketnum': '432456',
       'plan': 'Plan 3',
-      'status': 'Completed',
+      'status': 'Drawn',
       'result': 'No Match',
       'matchType': 'normal',
     },
@@ -31,9 +32,10 @@ class _PredictionHistoryScreenState extends State<PredictionHistoryScreen> {
       'lottery': 'Sthree Sakthi',
       'date': '25-10-2025',
       'prize': '2nd prize',
-      'ticket': 'AK 789234',
+      'ticket': 'AK',
+      'ticketnum': '789234',
       'plan': 'Plan 3',
-      'status': 'Completed',
+      'status': 'Drawn',
       'result': 'No Match',
       'matchType': 'normal',
     },
@@ -41,9 +43,10 @@ class _PredictionHistoryScreenState extends State<PredictionHistoryScreen> {
       'lottery': 'Karunya Plus',
       'date': '25-10-2025',
       'prize': '1st prize',
-      'ticket': 'KR 567890',
+      'ticket': 'KR',
+      'ticketnum': '567890',
       'plan': 'Plan 3',
-      'status': 'Completed',
+      'status': 'Drawn',
       'result': 'Close Match',
       'matchType': 'close',
     },
@@ -51,7 +54,8 @@ class _PredictionHistoryScreenState extends State<PredictionHistoryScreen> {
       'lottery': 'Dhanalakshmi',
       'date': '25-10-2025',
       'prize': '7th Prize',
-      'ticket': 'RN 234567',
+      'ticket': 'RN',
+      'ticketnum': '234567',
       'plan': 'Plan 1',
       'status': 'Pending',
       'result': '',
@@ -59,10 +63,17 @@ class _PredictionHistoryScreenState extends State<PredictionHistoryScreen> {
     },
   ];
 
-  List<Map<String, dynamic>> get filteredList {
-    if (selectedTab == 'All') return predictions;
-    return predictions.where((item) => item['status'] == selectedTab).toList();
+ List<Map<String, dynamic>> get filteredList {
+  if (selectedTab == 'All') return predictions;
+  if (selectedTab == 'Completed') {
+    return predictions.where((item) => item['status'] == 'Drawn').toList();
   }
+  if (selectedTab == 'Pending') {
+    return predictions.where((item) => item['status'] == 'Pending').toList();
+  }
+  return [];
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +85,7 @@ class _PredictionHistoryScreenState extends State<PredictionHistoryScreen> {
           Appbar_widget(),
 
           // ---- White tab section (under gradient) ----
-          Spacing.height(20),
+          Spacing.height(10),
           Container(
             color: Colors.white,
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
