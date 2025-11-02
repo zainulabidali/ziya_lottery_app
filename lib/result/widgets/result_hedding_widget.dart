@@ -27,10 +27,7 @@ class result_hedding_widget extends StatelessWidget {
           Spacer(),
           IconButton(
             onPressed: () {},
-            icon: Image.asset(
-              'assets/images/Upgrade.png',
-              height: 24.h,
-            ),
+            icon: Icon(Icons.qr_code_scanner_sharp,color: Colors.white,),
           ),
         ],
       ),

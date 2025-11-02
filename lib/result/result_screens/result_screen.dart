@@ -132,7 +132,6 @@ class _LotteryResultScreenState extends State<LotteryResultScreen> {
                   // Search TextField
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                      vertical: 4.0,
                       horizontal: 18.0,
                     ),
                     child: Container(
@@ -153,7 +152,7 @@ class _LotteryResultScreenState extends State<LotteryResultScreen> {
                             // Blue search icon section
                             Container(
                               height: 55.h,
-                              width: 38.w,
+                              width: 45.w,
                               decoration: const BoxDecoration(
                                 color: Color(0xFF1976D2),
                               ),
@@ -244,7 +243,7 @@ class _LotteryResultScreenState extends State<LotteryResultScreen> {
                     ),
                   ),
 
-                  SizedBox(height: 12.h),
+                  SizedBox(height: 4.h),
 
                   // Date Picker TextField (Styled)
                   Padding(
@@ -270,7 +269,7 @@ class _LotteryResultScreenState extends State<LotteryResultScreen> {
                             // Blue calendar icon section
                             Container(
                               height: 55.h,
-                              width: 38.w,
+                              width: 45.w,
                               decoration: const BoxDecoration(
                                 color: Color(0xFF1976D2),
                               ),
@@ -318,7 +317,7 @@ class _LotteryResultScreenState extends State<LotteryResultScreen> {
                     ),
                   ),
 
-                  SizedBox(height: 20.h),
+                  SizedBox(height: 8.h),
 
                   // Check button
                   Padding(
@@ -355,7 +354,7 @@ class _LotteryResultScreenState extends State<LotteryResultScreen> {
                     ),
                   ),
 
-                  SizedBox(height: 20.h),
+                  SizedBox(height: 12.h),
                   Consolation_prize_widget(
                     showResults: showResults,
                     prizeData: prizeData,
