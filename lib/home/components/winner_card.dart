@@ -19,7 +19,7 @@ class WinnerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 357, 
+      width: 357,
       // height: 135,
       margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
       padding: const EdgeInsets.all(9),
@@ -88,7 +88,7 @@ class WinnerCard extends StatelessWidget {
 
           // main card info
           Padding(
-            padding: const EdgeInsets.only(left: 45, top: 3),
+            padding: const EdgeInsets.only(left: 0, top: 10),
             child: Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
@@ -212,7 +212,10 @@ class WinnerCard extends StatelessWidget {
 
           // bottom row
           Padding(
-            padding: const EdgeInsets.only(left: 45, top: 4),
+            padding: const EdgeInsets.symmetric(
+              horizontal:5,
+              vertical: 5
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

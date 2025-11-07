@@ -131,19 +131,18 @@ class _LotteryResultScreenState extends State<LotteryResultScreen> {
 
                   // Search TextField
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 18.0,
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 18.0),
                     child: Container(
+                      height: 55,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12.r),
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color.fromARGB(255, 135, 135, 135),
-                            blurRadius: 4,
-                            offset: const Offset(0, 2),
-                          ),
-                        ],
+                        // boxShadow: [
+                        //   BoxShadow(
+                        //     color: const Color.fromARGB(255, 135, 135, 135),
+                        //     blurRadius: 4,
+                        //     offset: const Offset(0, 2),
+                        //   ),
+                        // ],
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(12.r),
@@ -252,15 +251,9 @@ class _LotteryResultScreenState extends State<LotteryResultScreen> {
                       horizontal: 18.0,
                     ),
                     child: Container(
+                      height: 55,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12.r),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color.fromARGB(255, 135, 135, 135),
-                            blurRadius: 4,
-                            offset: const Offset(0, 2),
-                          ),
-                        ],
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(12.r),
@@ -331,7 +324,7 @@ class _LotteryResultScreenState extends State<LotteryResultScreen> {
                       child: ElevatedButton(
                         onPressed: () {
                           setState(() {
-                            showResults = true;
+                            showResults = false;
                           });
                         },
                         style: ElevatedButton.styleFrom(
@@ -365,11 +358,7 @@ class _LotteryResultScreenState extends State<LotteryResultScreen> {
           ],
         ),
       ),
-      // Adding Bottom Navigation Bar
-      // bottomNavigationBar: BottomNavBar(
-      //   selectedIndex: selectedIndex,
-      //   onItemSelected: onNavTapped,
-      // ),
+    
     );
   }
 }

@@ -1,12 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottery_app/home/components/lottery_card.dart';
+import 'package:lottery_app/home/sthreeSakthi/screens/prize_screen.dart';
 
 class lottary_wedgets extends StatelessWidget {
-  const lottary_wedgets({
-    super.key,
-  });
+  const lottary_wedgets({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +29,12 @@ class lottary_wedgets extends StatelessWidget {
             imagePath: "assets/images/Sthree_Sakth.png",
             title: 'Sthree Sakthi',
             subtitle: '7 Prizes',
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PrizeScreen()),
+              );
+            },
           ),
           LotteryCard(
             imagePath: "assets/images/Dhanalekshmi.png",
@@ -50,6 +53,3 @@ class lottary_wedgets extends StatelessWidget {
     );
   }
 }
-
-
-

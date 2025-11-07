@@ -73,7 +73,7 @@ class _PlanCardState extends State<PlanCard> {
     }
 
     return GestureDetector(
-      onTap: switchPlan,
+      // onTap: switchPlan,
       child: Stack(
         clipBehavior: Clip.none,
         children: [

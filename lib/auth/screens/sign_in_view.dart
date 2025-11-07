@@ -86,28 +86,48 @@ class SignInView extends StatelessWidget {
 
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Row(
-                              children: [
-                                Checkbox(
-                                  value: provider.rememberMe,
-                                  onChanged: provider.toggleRemember,
-                                ),
-                                Text(AppStrings.rememberMe),
-                              ],
+                            Flexible(
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Checkbox(
+                                    value: provider.rememberMe,
+                                    onChanged: provider.toggleRemember,
+                                    materialTapTargetSize: MaterialTapTargetSize
+                                        .shrinkWrap, // smaller checkbox area
+                                  ),
+                                  Flexible(
+                                    child: Text(
+                                      AppStrings.rememberMe,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(fontSize: 12.sp),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pushNamed(
-                                  context,
-                                  '/forgot-password',
-                                );
-                              },
-                              child: Text(
-                                AppStrings.forgetPass,
-                                style: TextStyle(
-                                  color: const Color.fromARGB(255, 41, 41, 41),
+                            Flexible(
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    '/forgot-password',
+                                  );
+                                },
+                                child: Text(
+                                  AppStrings.forgetPass,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: 12.sp,
+                                    color: const Color.fromARGB(
+                                      255,
+                                      41,
+                                      41,
+                                      41,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
@@ -118,7 +138,8 @@ class SignInView extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
                           child: CustomButton(
                             text: AppStrings.signIn,
-                            onPressed: () => AuthController.handleSignIn(context),
+                            onPressed: () =>
+                                AuthController.handleSignIn(context),
                           ),
                         ),
                         Spacing.height(10),

@@ -86,26 +86,27 @@ class _PredictionHistoryScreenState extends State<PredictionHistoryScreen> {
 
           // ---- White tab section (under gradient) ----
           Spacing.height(10),
-          Container(
-            color: Colors.white,
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
-            child: Container(
-              width: 358,
-              height: 26.h,
-              decoration: BoxDecoration(
-                color: const Color(0xFFE9E9E9),
-                borderRadius: BorderRadius.circular(10.r),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  buildTab("All"),
-                  buildTab("Completed"),
-                  buildTab("Pending"),
-                ],
-              ),
-            ),
-          ),
+         Container(
+  color: Colors.white,
+  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+  child: Container(
+    width: double.infinity, // ✅ takes full available width
+    height: 26.h,
+    decoration: BoxDecoration(
+      color: const Color(0xFFE9E9E9),
+      borderRadius: BorderRadius.circular(10.r),
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Expanded(child: buildTab("All")),
+        Expanded(child: buildTab("Completed")),
+        Expanded(child: buildTab("Pending")),
+      ],
+    ),
+  ),
+)
+,
 
           // ---- Prediction List ----
           Expanded(

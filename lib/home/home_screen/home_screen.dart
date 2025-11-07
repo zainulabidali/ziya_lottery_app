@@ -60,6 +60,8 @@ class _HomeScreenState extends State<HomeScreen> {
       'date': '12 Oct 2025',
     },
   ];
+  PageController pageController = PageController();
+  int currentPage = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -75,27 +77,29 @@ class _HomeScreenState extends State<HomeScreen> {
               Spacing.height(2),
 
               // Make recent winners section scrollable with indicators
-              recent_firstpricewinner_widget(
-                currentPage: 0, // This should be managed if needed
-              ),
+              RecentFirstPriceWinnerWidget(currentPage: currentPage),
 
               // Scrollable WinnerCard section
               Container(
-                height: 160, // Adjust based on card height
+                height: 160,
                 child: PageView.builder(
+                  controller: pageController,
                   itemCount: winnerData.length,
-                  // Removed onPageChanged since it's managed in MainScreen
+                  onPageChanged: (index) {
+                    setState(() {
+                      currentPage = index;
+                    });
+                  },
                   itemBuilder: (context, index) {
                     final winner = winnerData[index];
                     return WinnerCard(
                       name: winner['name']!,
-                      lottery: winner['lottery']!, // Fixed the order
-                      ticket: winner['ticket']!,   // Fixed the order
+                      lottery: winner['lottery']!,
+                      ticket: winner['ticket']!,
                       location: winner['location']!,
                       date: winner['date']!,
                     );
                   },
-                  // Removed onPageChanged callback
                 ),
               ),
 
@@ -132,7 +136,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               lottary_wedgets(), // Note: Typo in widget name - should be "lottery_widgets"
-
               // SizedBox(height: 20.h),
             ],
           ),

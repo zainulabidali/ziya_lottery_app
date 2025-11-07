@@ -3,4 +3,6 @@ class UserModel {
   final String password;
 
   UserModel({required this.phone, required this.password});
+
+  // static String get plan => null;
 }

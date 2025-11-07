@@ -71,4 +71,6 @@ class PlanModel {
         );
     }
   }
+
+  set isSelected(bool isSelected) {}
 }

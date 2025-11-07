@@ -42,8 +42,8 @@ class lottery_App extends StatelessWidget {
             theme: ThemeData(fontFamily: 'Poppins'),
             initialRoute: '/',
             routes: {
-              '/': (context) => const MainScreen(), // Changed to TestMainScreen
-              // '/signin': (context) => const SignInView(),
+              '/': (context) => const MainScreen(), 
+              // '/signin': (context) => const WelcomeView(),
               // '/forgot-password': (context) => const ForgotPasswordView(),
             },
           );

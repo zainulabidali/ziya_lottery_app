@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottery_app/history/history_screens/history_screen.dart';
 import 'package:lottery_app/home/home_screen/home_screen.dart';
+import 'package:lottery_app/profile/screens/profile_screen.dart';
 import 'package:lottery_app/result/result_screens/result_screen.dart';
 import 'package:lottery_app/BottomNavBar/bottom_nav_bar.dart';
 
@@ -19,7 +20,7 @@ class _MainScreenState extends State<MainScreen> {
     const HomeScreen(),
     const LotteryResultScreen(),
     const PredictionHistoryScreen(),
-    const Center(child: Text("Profile Screen")),
+    const ProfileScreen()
   ];
 
   void _onNavTapped(int index) {
