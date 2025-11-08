@@ -116,6 +116,11 @@ class _LotteryResultScreenState extends State<LotteryResultScreen> {
           children: [
             Container(
               decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
+                ),
+
                 gradient: LinearGradient(
                   colors: AppColors.kGradientColors,
                   begin: Alignment.topLeft,
@@ -358,7 +363,6 @@ class _LotteryResultScreenState extends State<LotteryResultScreen> {
           ],
         ),
       ),
-    
     );
   }
 }

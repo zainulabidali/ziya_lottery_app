@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottery_app/firebase_options.dart';
 import 'package:lottery_app/auth/providers/auth_provider.dart';
@@ -14,6 +15,7 @@ import 'package:provider/provider.dart';
 void main() async {
   // Ensure Flutter bindings are initialized
   WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   // Initialize Firebase
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -42,7 +44,7 @@ class lottery_App extends StatelessWidget {
             theme: ThemeData(fontFamily: 'Poppins'),
             initialRoute: '/',
             routes: {
-              '/': (context) => const MainScreen(), 
+              '/': (context) => const MainScreen(),
               // '/signin': (context) => const WelcomeView(),
               // '/forgot-password': (context) => const ForgotPasswordView(),
             },

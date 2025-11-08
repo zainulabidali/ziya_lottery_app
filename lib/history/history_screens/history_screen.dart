@@ -63,17 +63,16 @@ class _PredictionHistoryScreenState extends State<PredictionHistoryScreen> {
     },
   ];
 
- List<Map<String, dynamic>> get filteredList {
-  if (selectedTab == 'All') return predictions;
-  if (selectedTab == 'Completed') {
-    return predictions.where((item) => item['status'] == 'Drawn').toList();
+  List<Map<String, dynamic>> get filteredList {
+    if (selectedTab == 'All') return predictions;
+    if (selectedTab == 'Completed') {
+      return predictions.where((item) => item['status'] == 'Drawn').toList();
+    }
+    if (selectedTab == 'Pending') {
+      return predictions.where((item) => item['status'] == 'Pending').toList();
+    }
+    return [];
   }
-  if (selectedTab == 'Pending') {
-    return predictions.where((item) => item['status'] == 'Pending').toList();
-  }
-  return [];
-}
-
 
   @override
   Widget build(BuildContext context) {
@@ -86,27 +85,26 @@ class _PredictionHistoryScreenState extends State<PredictionHistoryScreen> {
 
           // ---- White tab section (under gradient) ----
           Spacing.height(10),
-         Container(
-  color: Colors.white,
-  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
-  child: Container(
-    width: double.infinity, // ✅ takes full available width
-    height: 26.h,
-    decoration: BoxDecoration(
-      color: const Color(0xFFE9E9E9),
-      borderRadius: BorderRadius.circular(10.r),
-    ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Expanded(child: buildTab("All")),
-        Expanded(child: buildTab("Completed")),
-        Expanded(child: buildTab("Pending")),
-      ],
-    ),
-  ),
-)
-,
+          Container(
+            color: Colors.white,
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+            child: Container(
+              width: double.infinity, // ✅ takes full available width
+              height: 26.h,
+              decoration: BoxDecoration(
+                color: const Color(0xFFE9E9E9),
+                borderRadius: BorderRadius.circular(10.r),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(child: buildTab("All")),
+                  Expanded(child: buildTab("Completed")),
+                  Expanded(child: buildTab("Pending")),
+                ],
+              ),
+            ),
+          ),
 
           // ---- Prediction List ----
           Expanded(
@@ -160,4 +158,3 @@ class _PredictionHistoryScreenState extends State<PredictionHistoryScreen> {
     );
   }
 }
-

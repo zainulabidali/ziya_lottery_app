@@ -17,6 +17,8 @@ class CustomAppBar extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(top: 25, left: 16, right: 16, bottom: 12),
       decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
+
         gradient: LinearGradient(
           colors: AppColors.kGradientColors,
           begin: Alignment.topLeft,

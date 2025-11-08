@@ -29,6 +29,7 @@ class _UpgradePlansScreenState extends State<UpgradePlansScreen> {
             width: double.infinity,
             height: 200.h,
             decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
               gradient: LinearGradient(
                 colors: AppColors.kGradientColors,
                 begin: Alignment.topLeft,

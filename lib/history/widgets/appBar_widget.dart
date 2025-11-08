@@ -12,6 +12,8 @@ class Appbar_widget extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
+
         gradient: LinearGradient(
           colors: AppColors.kGradientColors,
           end: Alignment.centerRight,

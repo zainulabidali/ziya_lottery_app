@@ -9,7 +9,6 @@ import 'package:lottery_app/home/widgets/home_header.dart';
 import 'package:lottery_app/home/widgets/lottery_widgets.dart';
 import 'package:lottery_app/home/widgets/recent_winners.widget.dart';
 import '../components/winner_card.dart';
-import '../../BottomNavBar/bottom_nav_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -135,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              lottary_wedgets(), // Note: Typo in widget name - should be "lottery_widgets"
+              LotteryWidgets(), // Note: Typo in widget name - should be "lottery_widgets"
               // SizedBox(height: 20.h),
             ],
           ),
