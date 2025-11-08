@@ -9,6 +9,7 @@ import 'package:lottery_app/home/widgets/home_header.dart';
 import 'package:lottery_app/home/widgets/lottery_widgets.dart';
 import 'package:lottery_app/home/widgets/recent_winners.widget.dart';
 import '../components/winner_card.dart';
+import '../prizeScreens/predictions/models/prediction_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,6 +20,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   // Removed selectedIndex since it's now managed by MainScreen
+  PredictionResultModel? featuredPrediction;
 
   // List of banner images for the carousel
   final List<String> bannerImages = [
@@ -70,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const HomeHeader(),
+              HomeHeader(featuredPrediction: featuredPrediction),
               // Replaced single image with scrollable image list
               ad_bannerimg_widget(bannerImages: bannerImages),
               Spacing.height(2),
@@ -101,6 +103,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 ),
               ),
+
+              // Featured Prediction Card with dynamic data
+              // FeaturedPredictionCard(predictionData: featuredPrediction),
 
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
@@ -134,7 +139,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              LotteryWidgets(), // Note: Typo in widget name - should be "lottery_widgets"
+              LotteryWidgets(
+                onPredictionResult: (result) {
+                  setState(() {
+                    featuredPrediction = result;
+                  });
+                },
+              ),
               // SizedBox(height: 20.h),
             ],
           ),

@@ -13,9 +13,9 @@ class PlanController extends ChangeNotifier {
 
   // Each plan's selection state
   final Map<String, bool> _planStatus = {
-    'free': true,
+    'free': false,
     'upgrade': false,
-    'basic': false,
+    'basic': true,
     'elite': false,
     'premium': false,
   };

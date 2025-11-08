@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottery_app/home/constants/app_colors.dart';
+import 'package:lottery_app/home/prizeScreens/predictions/models/prediction_model.dart';
 
 class FeaturedPredictionCard extends StatelessWidget {
-  const FeaturedPredictionCard({super.key});
+  final PredictionResultModel? predictionData;
+
+  const FeaturedPredictionCard({super.key, this.predictionData});
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +79,9 @@ class FeaturedPredictionCard extends StatelessWidget {
       ),
       SizedBox(height: 6.h),
       Text(
-        "Kerala Lottery - First Prize",
+        predictionData != null 
+          ? "${predictionData!.lotteryName} - ${predictionData!.prizeType}" 
+          : "Kerala Lottery - First Prize",
         style: TextStyle(
           fontSize: 9.sp,
           fontWeight: FontWeight.w600,
@@ -85,33 +90,58 @@ class FeaturedPredictionCard extends StatelessWidget {
       ),
       SizedBox(height: 6.h),
       Row(
-        children: List.generate(
-          5,
-          (index) => Padding(
-            padding: EdgeInsets.only(right: 6.w),
-            child: Container(
-              width: 32.w,
-              height: 18.h,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(3.r),
-                gradient: const LinearGradient(
-                  colors: AppColors.kGradientColors,
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
+        children: predictionData != null
+          ? predictionData!.numbers.map((number) => Padding(
+              padding: EdgeInsets.only(right: 6.w),
+              child: Container(
+                width: 32.w,
+                height: 18.h,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(3.r),
+                  gradient: const LinearGradient(
+                    colors: AppColors.kGradientColors,
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
+                ),
+                child: Text(
+                  number.toString(),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 9.sp,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
-              child: Text(
-                "2834",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 9.sp,
-                  fontWeight: FontWeight.w700,
+            )).toList()
+          : List.generate(
+              5,
+              (index) => Padding(
+                padding: EdgeInsets.only(right: 6.w),
+                child: Container(
+                  width: 32.w,
+                  height: 18.h,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(3.r),
+                    gradient: const LinearGradient(
+                      colors: AppColors.kGradientColors,
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
+                  ),
+                  child: Text(
+                    "2834",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 9.sp,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
-        ),
       ),
       SizedBox(height: 8.h),
       Row(

@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottery_app/home/components/lottery_card.dart';
 import 'package:lottery_app/home/prizeScreens/screens/prize_screen.dart';
+import 'package:lottery_app/home/prizeScreens/predictions/models/prediction_model.dart';
 
 class LotteryWidgets extends StatefulWidget {
-  const LotteryWidgets({super.key});
+  final Function(PredictionResultModel)? onPredictionResult;
+
+  const LotteryWidgets({super.key, this.onPredictionResult});
 
   @override
   State<LotteryWidgets> createState() => _LotteryWidgetsState();
@@ -51,8 +54,8 @@ class _LotteryWidgetsState extends State<LotteryWidgets> {
               imagePath: lottery['image']!,
               title: lottery['title']!,
               subtitle: lottery['subtitle']!,
-              onTap: () {
-                Navigator.push(
+              onTap: () async {
+                final result = await Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => PrizeScreen(
@@ -62,6 +65,11 @@ class _LotteryWidgetsState extends State<LotteryWidgets> {
                     ),
                   ),
                 );
+                
+                // If we received a prediction result, pass it up to the HomeScreen
+                if (result != null && widget.onPredictionResult != null) {
+                  widget.onPredictionResult!(result);
+                }
               },
             );
           }).toList(),
