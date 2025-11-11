@@ -37,7 +37,7 @@ class _PredictionScreenState extends State<PredictionScreen> {
       currentState = PredictionState.generating;
     });
 
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 2));
 
     setState(() {
       predictionData = PredictionModel.sample();
@@ -148,6 +148,11 @@ class _PredictionScreenState extends State<PredictionScreen> {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
+
+
+
+
+          // containers......predictionData 
           if (predictionData != null)
             Wrap(
               spacing: 8,
@@ -157,6 +162,9 @@ class _PredictionScreenState extends State<PredictionScreen> {
                   .map((e) => PredictionCard(number: e))
                   .toList(),
             ),
+
+
+
           const SizedBox(height: 20),
           const Text(
             'Ai analyzed recent draw patterns and generated predictions. Tap Generate Predictions to start.',
@@ -166,7 +174,7 @@ class _PredictionScreenState extends State<PredictionScreen> {
           const SizedBox(height: 30),
           GenerateButton(
             onPressed: () {
-              // Pop with the prediction result
+              // Pop with the prediction result 
               Navigator.pop(context, PredictionResultModel(
                 lotteryName: widget.selectedTitle,
                 prizeType: widget.selectedPrizeTitle,

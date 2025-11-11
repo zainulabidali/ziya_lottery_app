@@ -14,7 +14,7 @@ class HomeHeader extends StatelessWidget {
     return Column(
       children: [
         CustomAppBar(
-          title: AppStrings.welcomeBack, 
+          title: AppStrings.welcomeBack,
           userName: 'John Doe',
           featuredPrediction: featuredPrediction,
         ),

@@ -8,7 +8,9 @@ import 'package:lottery_app/home/widgets/ad_bannerimg_widget.dart';
 import 'package:lottery_app/home/widgets/home_header.dart';
 import 'package:lottery_app/home/widgets/lottery_widgets.dart';
 import 'package:lottery_app/home/widgets/recent_winners.widget.dart';
+import 'package:provider/provider.dart';
 import '../components/winner_card.dart';
+import '../controller/plancard_controller.dart';
 import '../prizeScreens/predictions/models/prediction_model.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -106,7 +108,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
               // Featured Prediction Card with dynamic data
               // FeaturedPredictionCard(predictionData: featuredPrediction),
-
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
                 child: Row(
@@ -144,6 +145,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   setState(() {
                     featuredPrediction = result;
                   });
+
+                  // Show the futures card with the prediction result
+                  Provider.of<PlanController>(
+                    context,
+                    listen: false,
+                  ).showFuturesCardWithData(result);
                 },
               ),
               // SizedBox(height: 20.h),
