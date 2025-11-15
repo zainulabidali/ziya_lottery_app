@@ -28,10 +28,7 @@ class Appbar_widget extends StatelessWidget {
       ),
       child: Row(
         children: [
-          IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () => Navigator.pop(context),
-          ),
+        SizedBox(width: 20,),
           Text(
             "Prediction History",
             style: TextStyle(

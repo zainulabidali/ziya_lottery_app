@@ -2,11 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottery_app/home/constants/app_colors.dart';
 import 'package:lottery_app/home/prizeScreens/predictions/models/prediction_model.dart';
+import 'package:provider/provider.dart';
+import 'package:lottery_app/home/controller/plancard_controller.dart';
 
 class FuturesCardWidget extends StatelessWidget {
   final PredictionResultModel predictionData;
 
   const FuturesCardWidget({super.key, required this.predictionData});
+
+  String _getActivePlanText(PlanController controller) {
+    // Map plan types to plan numbers
+    final planType = controller.activePlanType;
+
+    if (planType == null) return "NO PLAN";
+
+    switch (planType) {
+      case 'basic':
+        return "PLAN 1";
+      case 'premium':
+        return "PLAN 2";
+      case 'elite':
+        return "PLAN 3";
+      default:
+        return "ACTIVE PLAN";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -142,40 +162,44 @@ class FuturesCardWidget extends StatelessWidget {
         SizedBox(height: 8.h),
 
         // Active plan information
-        Container(
-          height: 24.h,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(5.r),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black12,
-                blurRadius: 5,
-                offset: const Offset(0, 2),
-              ),
-            ],
-          ),
-          alignment: Alignment.center,
-          child: RichText(
-            text: TextSpan(
-              text: "YOUR ACTIVE PLAN : ",
-              style: TextStyle(
-                color: Colors.black87,
-                fontSize: 10.sp,
-                fontWeight: FontWeight.w500,
-              ),
-              children: [
-                TextSpan(
-                  text: "PLAN 2",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w600,
+        Consumer<PlanController>(
+          builder: (context, controller, _) {
+            return Container(
+              height: 24.h,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(5.r),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 5,
+                    offset: const Offset(0, 2),
                   ),
+                ],
+              ),
+              alignment: Alignment.center,
+              child: RichText(
+                text: TextSpan(
+                  text: "YOUR ACTIVE PLAN : ",
+                  style: TextStyle(
+                    color: Colors.black87,
+                    fontSize: 10.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: _getActivePlanText(controller),
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         ),
       ],
     );
